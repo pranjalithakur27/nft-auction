@@ -21,3 +21,7 @@
 ### The api.js file is located in the api folder.
 All you need to do is the following command to start the server.
 ```node api.js```
+
+1. Firstly, we have to register the token, approve it and the transfer to the Auction Smart contract.(only Owner of the smart contract can call these functions).
+2. Then, Create the Auction (only Owner).
+3. Anyone can then Bid on the Auction till it is ended or cancelled by the owner.
