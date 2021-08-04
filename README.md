@@ -34,24 +34,24 @@ All you need to do is the following command to start the server.
          ```{
             "_tokenId": 1,   
             "_uri": "we"}```\
-     Expected Result:
-         ```Registered Token```
+      Expected Result:
+         Registered Token
          
 2. Approve to transfer Token to Auction Contract:\
    Params: tokenId\
       Example: 
          ```{ 
             "_tokenId": 1}```\
-     Expected Result:
-         ```Approved To Transfer Token To The Auction Contract```
+      Expected Result:
+         Approved To Transfer Token To The Auction Contract
          
 3. Transfer Token to Auction Contract:\
    Params: tokenId\
       Example: 
          ```{ 
             "_tokenId": 1}```\
-     Expected Result:
-         ```Transfer Token To The Auction Contract```
+      Expected Result:
+         Transfer Token To The Auction Contract
          
 4. Create Auction:   
    Params: tokenId, startPrice, blockDeadLine, bidIncrement\
@@ -62,4 +62,43 @@ All you need to do is the following command to start the server.
              "_blockDeadline" : 123,
              "_bidIncrement" : 5
               }```\
-   
+      Expected Result: 
+         Auction Created
+              
+5. Bid On an Action:
+   Params: auctionId, value
+      Example:
+         ```{
+            "id" : 1,
+            "value" : 25
+            }```\
+      Expected Result: 
+         Bid Placed by 0x...
+         
+6. Cancel Auction:
+   Params: auctionId
+      Example:
+         ```{
+            "id" : 1
+            }```\
+      Expected Result: 
+         Auction Cancelled
+        
+7. Finalize the Auction:
+   Params: auctionId
+      Example:
+         ```{
+            "id" : 1
+            }```\
+      Expected Result: 
+         Auction Finalized
+        
+8. Withdraw:
+   Params: auctionId
+      Example:
+         ```{
+            "id" : 1
+            }```\
+      Expected Result: 
+         Withdraw complete
+            
