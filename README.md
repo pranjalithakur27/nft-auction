@@ -31,15 +31,35 @@ All you need to do is the following command to start the server.
 1. Register Token:\
    Params: tokenId, tokenUri\
       Example: 
-         ```{ 
-         "_tokenId": 1,    
-         "_uri": "we"}```\
+         ```{
+            "_tokenId": 1,\    
+            "_uri": "we"}```\
      Expected Result:
          ```Registered Token```
-2. Approve Token:\
+         
+2. Approve to transfer Token to Auction Contract:\
    Params: tokenId\
       Example: 
          ```{ 
-         "_tokenId": 1}```\
+            "_tokenId": 1}```\
      Expected Result:
          ```Approved To Transfer Token To The Auction Contract```
+         
+3. Transfer Token to Auction Contract:\
+   Params: tokenId\
+      Example: 
+         ```{ 
+            "_tokenId": 1}```\
+     Expected Result:
+         ```Transfer Token To The Auction Contract```
+         
+4. Create Auction:   
+   Params: tokenId, startPrice, blockDeadLine, bidIncrement\
+      Example:
+         ```/ {
+             "_tokenId" : 1,\
+             "_startPrice" : 20,\
+             "_blockDeadline" : 123,\
+             "_bidIncrement" : 5\
+              }```
+   
