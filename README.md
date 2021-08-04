@@ -17,3 +17,7 @@
 2. Deploy Contract with following command
    - ```truffle.cmd migrate```  on Windows
    - ```truffle migrate```
+
+The api.js file is located in the api folder
+All you need to do is the following command to start the server.
+```node api.js```
