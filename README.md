@@ -36,3 +36,10 @@ All you need to do is the following command to start the server.
          "_uri": "we"}```\
      Expected Result:
          ```Registered Token```
+2. Approve Token:\
+   Params: tokenId\
+      Example: 
+         ```{ 
+         "_tokenId": 1}```\
+     Expected Result:
+         ```Approved To Transfer Token To The Auction Contract```
