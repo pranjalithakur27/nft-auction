@@ -9,7 +9,7 @@
        - ```ganache-cli```
        - This will create Test network
 
-# Compile, Deploy and Test Project
+## Compile, Deploy and Test Project
 1. Inside that folder Compile with following command
    - ```truffle.cmd compile``` on Windows
    - ```truffle compile```
@@ -18,6 +18,6 @@
    - ```truffle.cmd migrate```  on Windows
    - ```truffle migrate```
 
-The api.js file is located in the api folder
+### The api.js file is located in the api folder.
 All you need to do is the following command to start the server.
 ```node api.js```
