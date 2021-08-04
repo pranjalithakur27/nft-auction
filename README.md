@@ -28,7 +28,7 @@ All you need to do is the following command to start the server.
 * After the Auction has ended it is Finalized and the token is transfered to the account with the highest bid.
 * And the other biders will be able to withdraw the amount that they previously bid.
 
-1. Register Token:\
+#### 1. Register Token:
    Params: tokenId, tokenUri\
       Example: 
          ```{
@@ -37,7 +37,7 @@ All you need to do is the following command to start the server.
       Expected Result:
          Registered Token
          
-2. Approve to transfer Token to Auction Contract:\
+#### 2. Approve to transfer Token to Auction Contract:
    Params: tokenId\
       Example: 
          ```{ 
@@ -45,7 +45,7 @@ All you need to do is the following command to start the server.
       Expected Result:
          Approved To Transfer Token To The Auction Contract
          
-3. Transfer Token to Auction Contract:\
+#### 3. Transfer Token to Auction Contract:
    Params: tokenId\
       Example: 
          ```{ 
@@ -53,7 +53,7 @@ All you need to do is the following command to start the server.
       Expected Result:
          Transfer Token To The Auction Contract
          
-4. Create Auction:\  
+#### 4. Create Auction: 
    Params: tokenId, startPrice, blockDeadLine, bidIncrement\
       Example:
          ```{
@@ -65,7 +65,7 @@ All you need to do is the following command to start the server.
       Expected Result: 
          Auction Created
               
-5. Bid On an Action:\
+#### 5. Bid On an Action:
    Params: auctionId, value
       Example:
          ```{
@@ -75,7 +75,7 @@ All you need to do is the following command to start the server.
       Expected Result: 
          Bid Placed by 0x...
          
-6. Cancel Auction:\
+#### 6. Cancel Auction:
    Params: auctionId
       Example:
          ```{
@@ -84,7 +84,7 @@ All you need to do is the following command to start the server.
       Expected Result: 
          Auction Cancelled
         
-7. Finalize the Auction:\
+#### 7. Finalize the Auction:
    Params: auctionId
       Example:
          ```{
@@ -93,7 +93,7 @@ All you need to do is the following command to start the server.
       Expected Result: 
          Auction Finalized
         
-8. Withdraw:\
+#### 8. Withdraw:
    Params: auctionId
       Example:
          ```{
