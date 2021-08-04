@@ -30,9 +30,9 @@ All you need to do is the following command to start the server.
 
 1. Register Token:\
    Params: tokenId, tokenUri\
-      Example: \
+      Example: 
          ```{ 
          "_tokenId": 1,
-         "_uri": "we"}```
-     Expected Result:\
+         "_uri": "we"}```\
+     Expected Result:
          ```Registered Token```
