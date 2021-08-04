@@ -56,7 +56,7 @@ All you need to do is the following command to start the server.
 4. Create Auction:   
    Params: tokenId, startPrice, blockDeadLine, bidIncrement\
       Example:
-         ```/ {
+         ```{
              "_tokenId" : 1,
              "_startPrice" : 20,
              "_blockDeadline" : 123,
