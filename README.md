@@ -32,7 +32,7 @@ All you need to do is the following command to start the server.
    Params: tokenId, tokenUri\
       Example: 
          ```{
-            "_tokenId": 1,\    
+            "_tokenId": 1,   
             "_uri": "we"}```\
      Expected Result:
          ```Registered Token```
@@ -57,9 +57,9 @@ All you need to do is the following command to start the server.
    Params: tokenId, startPrice, blockDeadLine, bidIncrement\
       Example:
          ```/ {
-             "_tokenId" : 1,\
-             "_startPrice" : 20,\
-             "_blockDeadline" : 123,\
-             "_bidIncrement" : 5\
-              }```
+             "_tokenId" : 1,
+             "_startPrice" : 20,
+             "_blockDeadline" : 123,
+             "_bidIncrement" : 5
+              }```\
    
