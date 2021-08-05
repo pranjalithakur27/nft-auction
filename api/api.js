@@ -4,7 +4,6 @@ const app = express();
 app.use(express.json());
 
 var Web3 = require('web3');
-var web3 = new Web3('http://localhost:7545');
 
 var token_artifacts =  require("../build/contracts/TokenRepo.json");
 var auction_artifacts = require("../build/contracts/AuctionRepo.json");
