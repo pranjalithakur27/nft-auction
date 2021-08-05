@@ -4,7 +4,7 @@ import "./TokenRepo.sol";
 
 contract AuctionRepo {
     
-    //Auction[] public auctions;
+ 
     mapping(uint256 => Auction) private _auctions;
     
     mapping(uint256=>bidding) public bid;
@@ -38,12 +38,14 @@ contract AuctionRepo {
         uint256 amount;
         address bidder;
     }
+
     
-    
-    
-    
-    
-    
+    event AuctionCreated(address _from, uint _auctionId);
+    event AuctionCanceled(address _owner, uint _auctionId);
+    event LogBid(address bidder, uint bid, address highestBidder, uint highestBid,uint highestBindingBid);
+    event Withdrawal(address withdrawer, address withdrawalAccount, uint amount);
+    event AuctionFinalized(address _owner, uint _auctionId);
+ 
     modifier isOwner(uint _auctionId) {
         require(_auctions[_auctionId].owner == msg.sender);
         _;
@@ -105,7 +107,7 @@ contract AuctionRepo {
         _auctionIds++;
         _auctions[_auctionIds] = Auction( _blockDeadline, _startPrice, _tokenId, _tokenRepositoryAddress,msg.sender, true , false, true, _bidIncrement);
         
-        //emit AuctionCreated(msg.sender, _auctionIds);
+        emit AuctionCreated(msg.sender, _auctionIds);
         return true;
     }
 
@@ -127,10 +129,10 @@ contract AuctionRepo {
         
          if(approveAndTransfer(address(this), auction.owner, auction.tokenRepositoryAddress, auction.tokenId)){
             _auctions[id].active = false;
-            //emit AuctionCanceled(msg.sender, id);
+            emit AuctionCanceled(msg.sender, id);
         }
         
-        //LogCanceled();
+        
         return true;
    }
    
@@ -146,7 +148,7 @@ contract AuctionRepo {
         Auction memory auction = _auctions[id];
         uint bidsLength = auctionBids[id].length;
 
-        // 1. if auction not ended just revert
+        // if auction not ended just revert
         if( block.timestamp < auction.blockDeadline ) revert();
         
         // if there are no bids cancel
@@ -154,7 +156,7 @@ contract AuctionRepo {
             cancelAuction(id);
         }else{
 
-            // 2. the money goes to the auction owner
+            // the money goes to the auction owner
             bidding memory lastBid = auctionBids[id][bidsLength - 1];
             if(!auction.owner.send(lastBid.amount)) {
                 revert();
@@ -164,7 +166,7 @@ contract AuctionRepo {
             if(approveAndTransfer(address(this), lastBid.highestBidder, auction.tokenRepositoryAddress, auction.tokenId)){
                 _auctions[id].active = false;
                 _auctions[id].finalized = true;
-                //emit AuctionFinalized(msg.sender, _auctionId);
+               emit AuctionFinalized(msg.sender, _auctionId);
             }
         }
     }
@@ -223,7 +225,7 @@ contract AuctionRepo {
         highestBid = newBid;
     }
 
-    //LogBid(msg.sender, newBid, bid.highestBidder, highestBid, bid.highestBindingBid);
+    emit LogBid(msg.sender, newBid, bid.highestBidder, highestBid, bid.highestBindingBid);
     return true;
     }
     
@@ -250,7 +252,7 @@ contract AuctionRepo {
     // send the funds
     if (!msg.sender.send(withdrawalAmount)) revert();
 
-    //LogWithdrawal(msg.sender, withdrawalAccount, withdrawalAmount);
+    emit Withdrawal(msg.sender, withdrawalAccount, withdrawalAmount);
 
     return true;
 }
