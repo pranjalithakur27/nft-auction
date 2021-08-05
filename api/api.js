@@ -14,11 +14,13 @@ var tokenaddress = token_artifacts.networks[5777].address;
 var auctionabi = auction_artifacts.abi;
 var auctionaddress = auction_artifacts.networks[5777].address;
 
+const init = async() => {
+var web3 = new Web3('http://localhost:7545');
+
 var tokeninstance = new web3.eth.Contract(tokenabi, tokenaddress);
 var auctioninstance = new web3.eth.Contract(auctionabi, auctionaddress);
 
-account1 = "0x8deA93c14A4f2E601B85B47098ddA7801038B220";
-account2 = "0x4eC3172c5724d81B2679e52ac3de75d9504B9ef8";
+const addresses = await web3.eth.getAccounts();
 
 app.get('/', function(req, res) {
 
@@ -29,14 +31,13 @@ app.get('/', function(req, res) {
 
 app.get('/name', function(req, res) {
 
-    tokeninstance.methods.name().call({from: account1,
+    tokeninstance.methods.name().call({from: addresses[0],
     gas: 3000000}, function(err, result) {
         console.log(result);
         
 
          if (!err) {
             res.json(result);
-            res.send('Token');
 
         } else
         res.status(401).json("Error" + err);
@@ -49,7 +50,7 @@ app.get('/owner/:id', function(req, res) {
 
     var id = req.params.id;
 
-    tokeninstance.methods.ownerOf(id).call({from: account1,
+    tokeninstance.methods.ownerOf(id).call({from: addresses[0],
     gas: 3000000}, function(err, result) {
         console.log(result);
         
@@ -74,13 +75,12 @@ app.post('/registerToken', function(req, res) {
     var tokenUri = req.body._uri;
 
     tokeninstance.methods.registerToken(tokenId, tokenUri).send({
-        from: account1,
+        from: addresses[0],
         gas: 3000000
     }, function(err, result) {
         console.log(result);
 
         if (!err) {
-            res.json(result);
             res.send('Registered Token');
 
         } else
@@ -98,13 +98,13 @@ app.post('/approve', function(req, res) {
     var tokenId = req.body.tokenId;
 
     tokeninstance.methods.approve(to, tokenId).send({
-        from: account1,
+        from: addresses[0],
         gas: 3000000
     }, function(err, result) {
         console.log(result);
 
         if (!err) {
-            //res.json(result);
+            
             res.send('Approved To Transfer Token To The Auction Contract');
         } else
         res.status(401).json("Error" + err);
@@ -117,12 +117,12 @@ app.post('/approve', function(req, res) {
 // }
 app.post('/transfer', function(req, res) {
 
-    var from = account1;
+    var from = addresses[0];
     var to = auctionaddress;
     var tokenId = req.body.tokenId;
 
     tokeninstance.methods.transferFrom(from, to, tokenId).send({
-        from: account1,
+        from: addresses[0],
         gas: 3000000
     }, function(err, result) {
         console.log(result);
@@ -152,7 +152,7 @@ app.post('/createAuction', function(req, res) {
     var _bidIncrement = req.body._bidIncrement;
 
     auctioninstance.methods.createAuction(_tokenRepositoryAddress, _tokenId, _startPrice, _blockDeadline, _bidIncrement).send({
-        from: account1,
+        from: addresses[0],
         gas: 3000000
     }, function(err, result) {
         console.log(result);
@@ -172,7 +172,7 @@ app.get('/getAuction/:id', function(req, res) {
     var id = req.params.id;
 
     auctioninstance.methods.getAuctionById(id).call({
-        from: account1,
+        from: addresses[0],
         gas: 3000000
     }, function(err, result) {
         console.log(result);
@@ -194,7 +194,7 @@ app.post('/bid', function(req, res) {
     var id = req.body.id;
     var value = req.body.value;
     auctioninstance.methods.placeBid(id).send({
-        from: account2,
+        from: addresses[1],
         gas: 3000000,
         value: value
     }, function(err, result) {
@@ -202,7 +202,7 @@ app.post('/bid', function(req, res) {
 
         if (!err) {
             //res.json(result);
-            res.send(`Bid Placed by ${account2}`);
+            res.send(`Bid Placed by ${addresses[1]}`);
         } else
         res.status(401).json("Error" + err);
     });
@@ -217,7 +217,7 @@ app.post('/cancel', function(req, res) {
     var id = req.body.id;
 
     auctioninstance.methods.cancelAuction(id).send({
-        from: account1,
+        from: addresses[0],
         gas: 3000000
     }, function(err, result) {
         console.log(result);
@@ -238,7 +238,7 @@ app.post('/finalize', function(req, res) {
     var id = req.body.id;
 
     auctioninstance.methods.finalizeAuction(id).send({
-        from: account2,
+        from: addresses[0],
         gas: 3000000
     }, function(err, result) {
         console.log(result);
@@ -259,7 +259,7 @@ app.post('/withdraw', function(req, res) {
     var id = req.body.id;
 
     auctioninstance.methods.withdraw(id).send({
-        from: account2,
+        from: addresses[1],
         gas: 3000000
     }, function(err, result) {
         console.log(result);
@@ -279,7 +279,7 @@ app.get('/bidsCount/:id', function(req, res) {
     var id = req.params.id;
 
     auctioninstance.methods.getBidsCount(id).call({
-        from: account1,
+        from: addresses[0],
         gas: 3000000
     }, function(err, result) {
         console.log(result);
@@ -298,7 +298,7 @@ app.get('/getCurrentBid/:id', function(req, res) {
     var id = req.params.id;
 
     auctioninstance.methods.getCurrentBid(id).call({
-        from: account1,
+        from: addresses[0],
         gas: 3000000
     }, function(err, result) {
         console.log(result);
@@ -310,8 +310,10 @@ app.get('/getCurrentBid/:id', function(req, res) {
     });
 
 });
-
+}
+init();
 
 //PORT
 var port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
+
