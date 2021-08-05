@@ -28,15 +28,20 @@ All you need to do is the following command to start the server.
 * After the Auction has ended it is Finalized and the token is transfered to the account with the highest bid.
 * And the other biders will be able to withdraw the amount that they previously bid.
 
+
+
+ _A seperate database will be needed for the frontend to store the token uri(ipfs URL)_ 
+ 
 #### 1. Register Token:
    Params: tokenId, tokenUri\
       Example: 
          ```{
             "_tokenId": 1,   
-            "_uri": "we"}```\
+            "_uri": "metadata..."}```\
       Expected Result:
-         Registered Token
-         
+         Registered Token\
+   
+     
 #### 2. Approve to transfer Token to Auction Contract:
    Params: tokenId\
       Example: 
