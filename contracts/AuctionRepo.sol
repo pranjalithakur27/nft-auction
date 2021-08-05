@@ -115,17 +115,6 @@ contract AuctionRepo {
         
         canceled = true;
         Auction memory auction = _auctions[id];
-        bidding memory bid = bid[id];
-        
-        uint bidLength = auctionBids[id].length;
-        
-        if(bidLength > 0) {
-             bidding memory lastBid = auctionBids[id][bidLength -1];
-             
-             if(!lastBid.highestBidder.send(lastBid.amount)){
-                 revert();
-             }
-        }
         
          if(approveAndTransfer(address(this), auction.owner, auction.tokenRepositoryAddress, auction.tokenId)){
             _auctions[id].active = false;
@@ -166,7 +155,7 @@ contract AuctionRepo {
             if(approveAndTransfer(address(this), lastBid.highestBidder, auction.tokenRepositoryAddress, auction.tokenId)){
                 _auctions[id].active = false;
                 _auctions[id].finalized = true;
-               emit AuctionFinalized(msg.sender, _auctionId);
+               emit AuctionFinalized(msg.sender, id);
             }
         }
     }
