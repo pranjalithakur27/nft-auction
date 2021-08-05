@@ -1,5 +1,5 @@
-const express = require('express');
-const app = express();
+var express = require('express');
+var app = express();
 
 app.use(express.json());
 
@@ -13,13 +13,13 @@ var tokenaddress = token_artifacts.networks[5777].address;
 var auctionabi = auction_artifacts.abi;
 var auctionaddress = auction_artifacts.networks[5777].address;
 
-const init = async() => {
+var init = async() => {
 var web3 = new Web3('http://localhost:7545');
 
 var tokeninstance = new web3.eth.Contract(tokenabi, tokenaddress);
 var auctioninstance = new web3.eth.Contract(auctionabi, auctionaddress);
 
-const addresses = await web3.eth.getAccounts();
+var addresses = await web3.eth.getAccounts();
 
 app.get('/', function(req, res) {
 
